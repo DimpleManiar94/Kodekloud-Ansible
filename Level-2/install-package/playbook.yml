@@ -1,0 +1,9 @@
+---
+- name: Install zip
+  hosts: all
+  become: true
+  tasks:
+  - name: Install zip
+    ansible.builtin.yum:
+      name: zip
+      state: present

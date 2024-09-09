@@ -1,0 +1,12 @@
+---
+- name: Create archive
+  hosts: all
+  tasks:
+  - name: Create archive
+    become: true
+    community.general.archive:
+      path: /usr/src/devops/
+      dest: /opt/devops/beta.tar.gz
+      owner: "{{ ansible_user }}"
+      group: "{{ ansible_user }}"
+      
