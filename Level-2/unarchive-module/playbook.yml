@@ -1,0 +1,13 @@
+---
+- name: Unzip Archive
+  hosts: all
+  tasks:
+  - name: Unzip Archive
+    become: true
+    ansible.builtin.unarchive:
+      src: /usr/src/itadmin/xfusion.zip
+      dest: /opt/itadmin/
+      owner: "{{ ansible_user }}"
+      group: "{{ ansible_user }}"
+      mode: 0777
+      

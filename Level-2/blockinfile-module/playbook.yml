@@ -1,0 +1,29 @@
+---
+- name: httpd web server
+  hosts: all
+  tasks:
+  - name: Install httpd
+    become: true
+    ansible.builtin.yum:
+      name: httpd
+      state: present
+  - name: Start service httpd
+    become: true
+    ansible.builtin.service:
+      name: httpd
+      state: started
+      enabled: yes
+  - name: Add web content
+    become: true
+    ansible.builtin.blockinfile:
+      path: /var/www/html/index.html
+      create: true #creates file if it does not exist
+      owner: apache
+      group: apache
+      mode: 0655
+      block: |
+        Welcome to XfusionCorp!
+
+        This is  Nautilus sample file, created using Ansible!
+
+        Please do not modify this file manually!
