@@ -1,1 +1,0 @@
-`stapp02 ansible_connection=ssh ansible_ssh_user=steve ansible_ssh_pass=Am3ric@`
