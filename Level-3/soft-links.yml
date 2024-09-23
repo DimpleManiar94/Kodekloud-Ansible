@@ -1,0 +1,42 @@
+---
+- name: Create file on app1
+  hosts: stapp01
+  tasks:
+  - name: Create file
+    become: true
+    ansible.builtin.file:
+      path: /opt/security/blog.txt
+      state: touch
+      owner: "{{ ansible_user }}"
+      group: "{{ ansible_user }}"
+- name: Create file on app2
+  hosts: stapp02
+  tasks:
+  - name: Create file
+    become: true
+    ansible.builtin.file:
+      path: /opt/security/story.txt
+      state: touch
+      owner: "{{ ansible_user }}"
+      group: "{{ ansible_user }}"
+- name: Create file on app3
+  hosts: stapp03
+  tasks:
+  - name: Create file
+    become: true
+    ansible.builtin.file:
+      path: /opt/security/media.txt
+      state: touch
+      owner: "{{ ansible_user }}"
+      group: "{{ ansible_user }}"
+- name: Create symbolic link
+  hosts: all
+  tasks:
+  - name: Create symbolic link
+    become: true
+    ansible.builtin.file:
+      src: /opt/security
+      dest: /var/www/html
+      owner: "{{ ansible_user }}"
+      group: "{{ ansible_user }}"
+      state: link
