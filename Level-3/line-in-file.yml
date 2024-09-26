@@ -1,0 +1,29 @@
+---
+- name: httpd web server
+  hosts: all
+  tasks:
+  - name: Install httpd
+    become: true
+    ansible.builtin.yum:
+      name: httpd
+      state: present
+  - name: Start service httpd
+    become: true
+    ansible.builtin.service:
+      name: httpd
+      state: started
+      enabled: yes
+  - name: Add web content
+    become: true
+    ansible.builtin.copy:
+      dest: /var/www/html/index.html
+      owner: apache
+      group: apache
+      mode: 0744
+      content: 'This is a Nautilus sample file, created using Ansible!'
+  - name: Add line to start of file
+    become: true
+    ansible.builtin.lineinfile:
+      path: /var/www/html/index.html
+      line: "Welcome to xFusionCorp Industries!"
+      insertbefore: "BOF"
